@@ -1,0 +1,78 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        FilaDinamica filaA = new FilaDinamica();
+        FilaDinamica filaB = new FilaDinamica();
+        FilaDinamica filaEst = new FilaDinamica();
+
+
+        Scanner entrada = new Scanner(System.in);
+
+        while(true){
+        int qtd = Integer.parseInt(entrada.nextLine());
+
+        if(qtd == 0){
+            break;
+        }
+
+        while (true) {
+            String nome = entrada.nextLine();
+            String[] array2 = nome.split(" ");
+
+            if(array2[0] == "0"){
+                System.out.println();
+                break;
+            }
+
+            for (int i = 0; i < qtd; i++) {
+
+                filaA.enqueue(i + 1);
+                filaB.enqueue(Integer.parseInt(array2[i]));
+
+            }
+
+            boolean b = true;
+
+            for (int i = 0; i < qtd; i++) {
+
+                System.out.print("Fila A ");
+                filaA.exibir();
+                System.out.print("Fila Est ");
+                filaEst.exibir();
+                System.out.print("Fila B ");
+                filaB.exibir();
+
+                if (filaEst.verificar()) {
+
+                    filaEst.enqueue(filaA.dequeue());
+
+                }
+                else {
+                    while (filaEst.getP() != filaB.getP()) {
+                        int a = filaA.dequeue();
+                        if (a == 0) {
+                            b = false;
+                            break;
+                        }
+                        filaEst.enqueue(a);
+
+                    }
+                    filaEst.dequeue();
+                    filaB.dequeue();
+
+                    }
+                }
+
+            if(b){
+                System.out.println("Yes");
+            }
+            else{
+                System.out.println("No");
+            }
+
+            }
+        }
+    }
+}
