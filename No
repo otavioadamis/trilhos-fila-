@@ -1,0 +1,11 @@
+public class No {
+
+    public int dados;
+    public No proximo;
+
+    public No(int dados) {
+        this.dados = dados;
+        proximo = null;
+    }
+
+}
